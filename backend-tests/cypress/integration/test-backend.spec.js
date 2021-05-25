@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('Test suite', () => {
-    /*it('Perform Login', () => {
+    it('Perform Login', () => {
         cy.request({
             method: 'POST',
             url: 'http://localhost:3000/api/login',
@@ -17,55 +17,60 @@ describe('Test suite', () => {
             Cypress.env({loginToken:response.body})
             cy.log(response.body)
         }))
-    })*/
+    })
 
     it('Create Bill', () => {
-        cy.request({
-            method: 'POST',
-            url: 'http://localhost:3000/api/bill/new',
-            headers: {
-                'X-User-Auth':JSON.stringify(Cypress.env().loginToken),
-                'Content-Type':'application/json'
-                },
-            body:{
-                "value":"5000"
-                }
-        }).then((response => {
-            expect(response.status).to.eq(200)
+        cy.authenticate().then((response => {
+            cy.request({
+                method: 'POST',
+                url: 'http://localhost:3000/api/bill/new',
+                headers: {
+                    'X-User-Auth':JSON.stringify(Cypress.env().loginToken),
+                    'Content-Type':'application/json'
+                    },
+                body:{
+                    "value":"5000"
+                    }
+            }).then((response => {
+                expect(response.status).to.eq(200)
+            }))
         }))
     
     })
 
     it('Edit Last Bill', () => {
-        cy.request({
-            method: 'GET',
-            url: 'http://localhost:3000/api/bills',
-            headers: {
-                'X-User-Auth':JSON.stringify(Cypress.env().loginToken),
-                'Content-Type':'application/json'
-            }
-        }).then((response => {
-            expect(response.status).to.eq(200)
-            let lastID = response.body[response.body.length -1].id
-            cy.log(lastID)
-
+        cy.authenticate().then((response => {
             cy.request({
-                method:'PUT',
-                url: 'http://localhost:3000/api/bill/'+lastID,
+                method: 'GET',
+                url: 'http://localhost:3000/api/bills',
                 headers: {
                     'X-User-Auth':JSON.stringify(Cypress.env().loginToken),
                     'Content-Type':'application/json'
-                },
-                body:{
-                    "value":"6000",
-                    "id":lastID,
-                    "created":"2021-05-19T21:21:00.609Z",
-                    "paid":true
                 }
             }).then((response => {
                 expect(response.status).to.eq(200)
-                cy.log(JSON.stringify(response.body))
+                let lastID = response.body[response.body.length -1].id
+                cy.log(lastID)
+    
+                cy.request({
+                    method:'PUT',
+                    url: 'http://localhost:3000/api/bill/'+lastID,
+                    headers: {
+                        'X-User-Auth':JSON.stringify(Cypress.env().loginToken),
+                        'Content-Type':'application/json'
+                    },
+                    body:{
+                        "value":"6000",
+                        "id":lastID,
+                        "created":"2021-05-19T21:21:00.609Z",
+                        "paid":true
+                    }
+                }).then((response => {
+                    expect(response.status).to.eq(200)
+                    cy.log(JSON.stringify(response.body))
+                }))
             }))
+        
         }))
     })
 
