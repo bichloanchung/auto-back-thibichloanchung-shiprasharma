@@ -13,5 +13,8 @@
   "devDependencies": {
     "cypress": "^7.3.0",
     "mochawesome": "^6.2.2"
+  },
+  "dependencies": {
+    "faker": "^5.5.3"
   }
 }
