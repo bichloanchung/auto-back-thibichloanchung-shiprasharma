@@ -5,7 +5,9 @@ import * as bill from '../helpers/billHelpers'
 describe('Test suite', () => {
 
     it('Perform create a new bill', () => {
-        cy.log(JSON.stringify(bill.createBill()))
+        cy.authenticate().then((response =>{
+            bill.createBillRequest()
+        }))
     })
 
 
