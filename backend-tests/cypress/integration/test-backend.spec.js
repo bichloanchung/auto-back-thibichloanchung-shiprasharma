@@ -7,6 +7,22 @@ describe('Test suite', () => {
     it('Perform create a new bill', () => {
         cy.authenticate().then((response =>{
             bill.createBillRequest()
+            bill.performLogout()
+        }))
+    })
+
+    it('Perform edit last bill', () => {
+        cy.authenticate().then((response => {
+            bill.editBillRequest(Cypress.env().lastID)
+            bill.performLogout()
+        }))
+    })
+
+    it('Perform delete last bill', () => {
+        cy.authenticate().then((response => {
+            bill.createBillRequest()
+            bill.deleteBillRequest(Cypress.env().lastID)
+            bill.performLogout()
         }))
     })
 
