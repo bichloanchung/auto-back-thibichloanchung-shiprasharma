@@ -1,6 +1,17 @@
 /// <reference types="cypress" />
 
+import * as bill from '../helpers/billHelpers'
+
 describe('Test suite', () => {
+
+    it('Perform create a new bill', () => {
+        cy.log(JSON.stringify(bill.createBill()))
+    })
+
+
+
+
+    /**
     it('Perform Login', () => {
         cy.request({
             method: 'POST',
@@ -187,4 +198,5 @@ describe('Test suite', () => {
             }))
         }))
     })
+    */
 })
