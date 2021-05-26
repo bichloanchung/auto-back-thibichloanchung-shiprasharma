@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import * as bill from '../helpers/billHelpers'
+import * as reser from '../helpers/reservationHelpers'
 
 describe('Test suite', () => {
 
@@ -26,7 +27,28 @@ describe('Test suite', () => {
         }))
     })
 
+    it('Perform create a new reservation', () => {
+        cy.authenticate().then((response => {
+            reser.createReserRequest()
+            reser.performLogout()
+        }))
+    })
 
+    it('Perform edit last reservation', () => {
+        cy.authenticate().then((response => {
+            reser.createReserRequest()
+            reser.editReserRequest(Cypress.env().lastID)
+            reser.performLogout()
+        }))
+    })
+
+    it('Perform delete last reservation', () => {
+        cy.authenticate().then((response => {
+            //reser.createReserRequest()
+            reser.deleteReserRequest(Cypress.env().lastID)
+            reser.performLogout()
+        }))
+    })
 
 
     /**
