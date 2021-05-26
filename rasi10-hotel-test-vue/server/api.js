@@ -51,12 +51,12 @@ router.post('/room/new', (req, res) => {
 	} else res.sendStatus(401)
 })
 router.put('/room/:id', (req, res) => {
-	const index = data.rooms.findIndex((c) => c.id === parseInt(req.params.id, 10))
-	if (userByHeaderToken(req) && index !== -1) {
-		req.body.floor = parseFloat(req.body.floor) || 0
-		req.body.number = parseFloat(req.body.number) || 0
-		req.body.price = parseFloat(req.body.price) || 0
-		res.send(data.rooms[index] = req.body)
+	const room = data.rooms.find((c) => c.id === parseInt(req.params.id, 10))
+	if (userByHeaderToken(req) && room) {
+		room.floor = parseFloat(req.body.floor) || 0
+		room.number = parseFloat(req.body.number) || 0
+		room.price = parseFloat(req.body.price) || 0
+		res.send(room)
 	} else res.sendStatus(401)
 })
 router.delete('/room/:id', (req, res) => {
