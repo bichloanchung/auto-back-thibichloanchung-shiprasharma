@@ -9,6 +9,7 @@ describe('Test suite', () => {
             room.performLogout()
         }))
     })
+    
     it('Edit a room', () => {
         cy.authenticate().then((response =>{
             room.editRoomRequest(Cypress.env().lastID)
@@ -18,6 +19,7 @@ describe('Test suite', () => {
 
     it('Delete a room', () => {
         cy.authenticate().then((response =>{
+            room.createRoomRequest()
             room.deleteRoomRequest(Cypress.env().lastID)
             room.performLogout()
         }))
