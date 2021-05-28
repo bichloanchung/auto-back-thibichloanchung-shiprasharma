@@ -1,6 +1,6 @@
 const faker = require('faker')
 
-const CREATE_CLIENT_ENDPOINT = 'http://localhost:3000/api/room/new'
+const CREATE_ROOM_ENDPOINT = 'http://localhost:3000/api/room/new'
 const EDIT_ROOM_ENDPOINT = 'http://localhost:3000/api/room/'
 //functions
 function createRoomPayload(){
@@ -31,7 +31,7 @@ function createEditPayload(){
 function createRoomRequest(){
     cy.request({
         method: 'POST',
-        url: CREATE_CLIENT_ENDPOINT,
+        url: CREATE_ROOM_ENDPOINT,
         headers: {
             'X-User-Auth':JSON.stringify(Cypress.env().loginToken), 
             'Content-Type': 'application/json'
