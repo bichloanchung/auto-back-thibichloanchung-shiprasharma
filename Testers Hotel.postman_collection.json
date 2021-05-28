@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "3e668a7f-ecb3-41ba-93be-45c58bb8f105",
+		"name": "Testers Hotel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"accessToken\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"tester01\",\r\n    \"password\" : \"GteteqbQQgSr88SwNExUQv2ydb7xuf8c\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Rooms",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Auth",
+						"value": "{\"username\":\"tester01\",\"token\":\"e7301f3462466cb7b63bfde7636c109e\"}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/rooms",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rooms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Room by Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Auth",
+						"value": "{\"username\":\"tester01\",\"token\":\"b35dc6fa852776399c38a7ebef909350\"}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/room/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"room",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Room",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Auth",
+						"value": "{\"username\":\"tester01\",\"token\":\"489e74eb2719350a7c4919ef07ee3639\"}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"category\": \"double\",\r\n    \"floor\": 2,\r\n    \"number\": 203,\r\n    \"available\": true,\r\n    \"price\": 2000,\r\n    \"features\": [\r\n        \"balcony\",\r\n        \"ensuite\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/room/new",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"room",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete room",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-User-Auth",
+						"value": "{\"username\":\"tester01\",\"token\":\"19b1377120d0c3c1e73bda6506805510\"}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/room/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"room",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get clients",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Auth",
+						"value": "{\"username\":\"tester01\",\"token\":\"5f9a570703a29b82a71da6194b5ede34\"}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/clients",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create client",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Auth",
+						"value": "{\"username\":\"tester01\",\"token\":\"{{accessToken}}\"}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 3,\r\n        \"name\": \"shipra sharma\",\r\n        \"email\": \"shipra.mishra@example.com\",\r\n        \"telephone\": \"070 5489011\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/client/new",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"client",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"accessToken\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"tester01\",\r\n    \"password\" : \"GteteqbQQgSr88SwNExUQv2ydb7xuf8c\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
